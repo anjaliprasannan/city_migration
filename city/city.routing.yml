@@ -1,0 +1,7 @@
+entity.city.settings:
+  path: 'admin/structure/city'
+  defaults:
+    _form: '\Drupal\city\Form\CitySettingsForm'
+    _title: 'City'
+  requirements:
+    _permission: 'administer city'

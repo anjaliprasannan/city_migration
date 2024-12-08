@@ -1,0 +1,52 @@
+uuid: 390c5ce6-e2b3-46ab-a485-260117203fa5
+langcode: en-gb
+status: true
+dependencies: {}
+_core:
+  default_config_hash: HiccydGZvwRvZq87DqyrY6gl1hRa1W_zhyRsQeo33cM
+id: city
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_group: City
+label: "City Migration"
+source:
+  plugin: url
+  data_parser_plugin: json
+  data_fetcher_plugin: file
+  urls: modules/custom/json_migration/source/cities.json
+  item_selector: /
+  ids:
+    id:
+      type: integer
+  fields:
+    - name: id
+      label: ID
+      selector: _id
+    - name: city_name
+      label: city
+      selector: city
+    - name: location
+      label: location
+      selector: loc
+    - name: pop
+      label: Pop
+      selector: pop
+    - name: state
+      label: state
+      selector: state
+process:
+  label:
+    plugin: get
+    source: city_name
+  field_location:
+    plugin: get_location_value
+    source: location
+  field_pop:
+    plugin: get
+    source: pop
+  field_state:
+    plugin: get
+    source: state
+destination:
+  plugin: "entity:city"

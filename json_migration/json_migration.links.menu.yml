@@ -1,0 +1,6 @@
+json_migration.menu:
+  title: "Migration Interface"
+  description: "Provides Interface for migration"
+  parent: system.admin_config
+  route_name: json_migration.settings
+  weight: 0

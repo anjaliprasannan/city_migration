@@ -1,0 +1,8 @@
+name: Json Migration
+type: module
+description: This module is for the json migration script
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:migrate_tools
+  - drupal:city
+  - drupal:migrate_plus

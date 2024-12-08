@@ -1,0 +1,7 @@
+json_migration.settings:
+  path: "/admin/config/json_migration"
+  defaults:
+    _form: '\Drupal\json_migration\Form\MigrationMapping'
+    _title: "City Name Mapping"
+  requirements:
+    _permission: "administer site configuration"
