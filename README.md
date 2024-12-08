@@ -1,6 +1,6 @@
 # JSON Migration for City Entity
 
-This project provides functionality to migrate JSON data into a custom `city` entity.
+Functionality to migrate JSON data into a custom `city` entity.
 
 ---
 
