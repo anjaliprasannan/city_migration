@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.city.city.field_loc
+    - field.field.city.city.field_location
     - field.field.city.city.field_pop
     - field.field.city.city.field_state
   module:
@@ -19,9 +19,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_loc:
+  field_location:
     type: string_textfield
-    weight: 21
+    weight: 24
     region: content
     settings:
       size: 60

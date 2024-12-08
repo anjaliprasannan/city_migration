@@ -1,13 +1,13 @@
-uuid: 8f307a2e-7af1-4490-8b50-8f44d854dd6e
+uuid: a0b55bf2-f7f0-488d-afd9-6e135f292f6c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.city.field_loc
+    - field.storage.city.field_location
   module:
     - custom_entity
-id: city.city.field_loc
-field_name: field_loc
+id: city.city.field_location
+field_name: field_location
 entity_type: city
 bundle: city
 label: Location

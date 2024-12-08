@@ -1,11 +1,11 @@
-uuid: 2003efe4-0e2a-4791-b56f-95382a9e368e
+uuid: 47a58d60-1e34-4ce9-95b8-160f66b60516
 langcode: en
 status: true
 dependencies:
   module:
     - custom_entity
-id: city.field_loc
-field_name: field_loc
+id: city.field_location
+field_name: field_location
 entity_type: city
 type: string
 settings:
