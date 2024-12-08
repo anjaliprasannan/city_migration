@@ -30,9 +30,12 @@ drush en custom_entity migration_json -y
    /admin/config/json_migration
    ```
 2. Run the migration to import JSON data into the `city` entity.
-   ```
-   Alternatively, run command: drush migrate:import city_entity
-   ```
+
+![alt text](Snip20241208_1.png)
+
+```
+Alternatively, run command: drush migrate:import city_entity
+```
 
 ### 3. View Imported Data
 
@@ -52,4 +55,4 @@ Edit the entries to view the fields.
 
 ### Result:
 
-![alt text](Snip20241208_2.png) ![alt text](Snip20241208_1.png)
+![alt text](Snip20241208_2.png)
