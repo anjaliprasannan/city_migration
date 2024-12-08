@@ -48,9 +48,4 @@ Alternatively, visit:
 /admin/content/city
 ```
 
----
-
-## Notes
-
-- Ensure the JSON source file is configured correctly in the migration YAML file.
-- Verify the custom entity module is installed and enabled before running the migration.
+Edit the entries to view the fields.
