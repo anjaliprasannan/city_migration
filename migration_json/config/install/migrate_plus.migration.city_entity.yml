@@ -5,7 +5,7 @@ source:
   plugin: url
   data_parser_plugin: json
   data_fetcher_plugin: file
-  urls: city_migration/migration_json/source/cities.json
+  urls: modules/custom/migration_json/source/cities.json
   item_selector: 0
   fields:
     - name: title
