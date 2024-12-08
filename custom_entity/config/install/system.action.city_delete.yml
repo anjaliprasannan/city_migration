@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - city
+    - custom_entity
 id: city_delete
 label: "Delete cities"
 type: city

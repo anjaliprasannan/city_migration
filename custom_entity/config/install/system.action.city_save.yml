@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - city
+    - custom_entity
 id: city_save
 label: "Save cities"
 type: city
