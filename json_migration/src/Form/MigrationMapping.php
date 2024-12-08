@@ -109,7 +109,7 @@ class MigrationMapping extends ConfigFormBase {
     $config = $this->config(static::SETTINGS);
     $config->set('field_name', $form_state->getValue('city_mapping'))
       ->save();
-    $migration_config = $this->configFactory()->getEditable('migrate_plus.migration.city');
+    $migration_config = $this->configFactory()->getEditable('migrate_plus.migration.city_migration');
     $process = $migration_config->get('process');
     $process[$config->get('field_name')] = [
       'plugin' => 'get',
