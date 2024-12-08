@@ -1,0 +1,20 @@
+uuid: bc8e8128-f1e6-4ab7-8d7c-034a58c1abda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.city.field_pop
+  module:
+    - custom_entity
+id: city.city.field_pop
+field_name: field_pop
+entity_type: city
+bundle: city
+label: Population
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

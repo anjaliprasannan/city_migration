@@ -1,0 +1,20 @@
+uuid: 8f307a2e-7af1-4490-8b50-8f44d854dd6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.city.field_loc
+  module:
+    - custom_entity
+id: city.city.field_loc
+field_name: field_loc
+entity_type: city
+bundle: city
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

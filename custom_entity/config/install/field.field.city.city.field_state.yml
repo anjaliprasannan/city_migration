@@ -1,0 +1,20 @@
+uuid: 69a43921-1d3f-4450-b075-218477c7ac99
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.city.field_state
+  module:
+    - custom_entity
+id: city.city.field_state
+field_name: field_state
+entity_type: city
+bundle: city
+label: State
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,46 @@
+id: city_entity
+migration_group: City
+label: "City Migration"
+source:
+  plugin: url
+  data_parser_plugin: json
+  data_fetcher_plugin: file
+  urls: modules/custom/json_migration/source/cities.json
+  item_selector: 0
+  fields:
+    - name: title
+      label: "ID"
+      selector: _id
+    - name: city_name
+      label: City
+      selector: city
+    - name: location
+      label: location
+      selector: loc
+    - name: pop
+      label: Pop
+      selector: pop
+    - name: state
+      label: state
+      selector: state
+  ids:
+    title:
+      type: string
+process:
+  title:
+    plugin: get
+    source: title
+  label:
+    plugin: get
+    source: city_name
+  field_location:
+    plugin: get_location_value
+    source: location
+  field_pop:
+    plugin: get
+    source: pop
+  field_state:
+    plugin: get
+    source: state
+destination:
+  plugin: "entity:city"
