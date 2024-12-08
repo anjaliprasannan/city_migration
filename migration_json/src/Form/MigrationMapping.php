@@ -143,6 +143,7 @@ class MigrationMapping extends ConfigFormBase {
    *   The options for the field.
    */
   protected function getCityFields() {
+    $field_options = [];
     $fields = $this->entityTypeManager->getStorage('city')->loadMultiple();
     if (!empty($fields)) {
       $fields = array_keys(reset($fields)->getFields());
