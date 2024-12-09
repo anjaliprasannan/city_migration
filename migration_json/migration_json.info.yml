@@ -1,6 +1,6 @@
 name: Migrate Json
 type: module
-description: Mogrates json to drupal custom entity
+description: Migrates json feed to drupal custom entity
 core_version_requirement: ^9 || ^10
 dependencies:
   - drupal:migrate_tools
