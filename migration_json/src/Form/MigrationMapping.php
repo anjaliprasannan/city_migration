@@ -85,12 +85,33 @@ class MigrationMapping extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config(static::SETTINGS);
+
+  // Fetch source fields from migration configuration.
+  $source_fields = $this->getSourceFields();
+
+    // Fetch city entity fields.
+    $city_entity_fields = $this->getCityFields();
+
     $form['city_mapping'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Mapping city Name field'),
-      '#options' => $this->getCityFields(),
-      '#default_value' => $config->get('field_name'),
-    ];
+        '#type' => 'table',
+        '#header' => [
+          $this->t('Source Field'),
+          $this->t('City Entity Field'),
+        ],
+      ];
+
+    // Loop through the source fields and build rows for mappings.
+    foreach ($source_fields as $field_name => $label) {
+        $form['city_mapping'][$field_name]['source'] = [
+        '#markup' => $label,
+        ];
+        $form['city_mapping'][$field_name]['destination'] = [
+        '#type' => 'select',
+        '#options' => $city_entity_fields,
+        '#default_value' => $config->get('mappings.' . $field_name) ?: '',
+        ];
+    }
+   
 
     $form['run_migration'] = [
       '#type' => 'submit',
@@ -99,6 +120,7 @@ class MigrationMapping extends ConfigFormBase {
         '::runMigration',
       ],
     ];
+    
     return parent::buildForm($form, $form_state);
   }
 
@@ -107,14 +129,31 @@ class MigrationMapping extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config(static::SETTINGS);
-    $config->set('field_name', $form_state->getValue('city_mapping'))
-      ->save();
+    $mappings = [];
+    $field_mappings = $form_state->getValue('city_mapping');
+
+      foreach ($field_mappings as $source_field => $mapping) {
+        $destination_field = $mapping['destination'];
+        if (!empty($destination_field)) {
+          $mappings[$source_field] = $destination_field;
+        }
+      }
+      
+    $config->set('mappings', $mappings)->save();
+    // Update the migration configuration.
+    $this->updateMigrationConfig($mappings);
+
+
     $migration_config = $this->configFactory()->getEditable('migrate_plus.migration.city_entity');
     $process = $migration_config->get('process');
-    $process[$config->get('field_name')] =[
-      'plugin' => 'get',
-      'source' => 'city_name',
-    ];
+
+        foreach ($config->get('mappings') as $source_field => $destination_field) {
+            $process[$destination_field] = [
+                'plugin' => 'get',
+                'source' => $source_field,
+            ];
+        }
+    
     $migration_config->set('process', $process);
     $migration_config->save();
     parent::submitForm($form, $form_state);
@@ -123,8 +162,11 @@ class MigrationMapping extends ConfigFormBase {
   /**
    * Run the migration script.
    */
-  public function runMigration() {
+  public function runMigration($migration_config) {
+    $migration_config = $this->configFactory()->getEditable('migrate_plus.migration.city_entity');
+    $process = $migration_config->get('process');
     $migration = $this->migrationManager->createInstance('city_entity');
+    $migration->setProcess($process);
     if (!empty($migration)) {
       $options = [
         'limit' => 0,
@@ -154,4 +196,32 @@ class MigrationMapping extends ConfigFormBase {
     return $field_options;
   }
 
+  protected function getSourceFields() {
+    $migration_config = $this->configFactory()->get('migrate_plus.migration.city_entity');
+    $fields = $migration_config->get('source.fields');
+    $source_fields = [];
+    foreach ($fields as $field) {
+      $source_fields[$field['name']] = $field['label'];
+    }
+    return $source_fields;
+  }
+
+  protected function updateMigrationConfig(array $mappings) {
+    $migration_config = $this->configFactory()->getEditable('migrate_plus.migration.city_entity');
+  
+    $process = [];
+    
+    foreach ($mappings as $source_field => $destination_field) {
+        if (!isset($process[$destination_field])) {
+            $process[$destination_field] = [
+                'plugin' => 'get',
+                'source' => [],
+            ];
+        }
+        $process[$destination_field]['source'][] = $source_field;
+    }
+    // Update the process section dynamically.
+    $migration_config->set('process', $process)->save();
+  }
+  
 }
